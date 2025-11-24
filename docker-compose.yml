@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  multimodal-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: multimodal-ai-agent
+    restart: unless-stopped
+
+    # GPU support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+    # Environment variables
+    env_file:
+      - .env
+
+    # Volumes
+    volumes:
+      - ./logs:/app/logs
+      - ./config:/app/config
+      - model_cache:/root/.cache/huggingface
+
+    # Network
+    networks:
+      - agent-network
+
+    # Healthcheck
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import telegram; print('OK')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  model_cache:
+    driver: local
+
+networks:
+  agent-network:
+    driver: bridge

@@ -1,0 +1,22 @@
+{
+  "servers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/tmp"],
+      "transport": "stdio",
+      "description": "File system operations"
+    },
+    "web_search": {
+      "transport": "streamable_http",
+      "url": "http://localhost:8001/mcp",
+      "headers": {},
+      "description": "Web search capabilities"
+    },
+    "database": {
+      "transport": "streamable_http",
+      "url": "http://localhost:8002/mcp",
+      "headers": {},
+      "description": "Database operations"
+    }
+  }
+}
