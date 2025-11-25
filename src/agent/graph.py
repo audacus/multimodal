@@ -1,11 +1,10 @@
 """LangGraph agent with multimodal support and tool calling."""
 
-import operator
-from typing import Annotated, List, Sequence, TypedDict
+from typing import List
 
 from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage
 from langchain_core.tools import BaseTool
-from langgraph.graph import END, StateGraph
+from langgraph.graph import END, MessagesState, StateGraph
 from langgraph.prebuilt import ToolNode, tools_condition
 from loguru import logger
 
@@ -14,16 +13,17 @@ from ..mcp import get_all_mcp_tools
 from ..models import Qwen3OmniModel
 
 
-class AgentState(TypedDict):
+class AgentState(MessagesState):
     """
     State for the multimodal agent graph.
 
+    Extends MessagesState with additional user tracking.
+
     Attributes:
-        messages: Conversation message history
+        messages: Conversation message history (inherited from MessagesState)
         user_id: User identifier (for memory/personalization)
     """
 
-    messages: Annotated[Sequence[BaseMessage], operator.add]
     user_id: str
 
 

@@ -1,43 +1,44 @@
-# LangChain/LangGraph Core
-langchain>=0.3.0
-langgraph>=0.2.0
-langchain-core>=0.3.0
-langchain-community>=0.3.0
+# LangChain/LangGraph Core (v1.x)
+langchain~=1.0
+langgraph~=1.0
+langchain-core~=1.1
+langchain-community~=0.4
 
 # MCP Integration
-langchain-mcp-adapters>=0.1.0
+langchain-mcp-adapters~=0.1
 
 # Telegram Bot
-python-telegram-bot>=21.0
+python-telegram-bot~=21.0
 python-telegram-bot[callback-data]
 
 # Multimodal Processing
-pillow>=10.0.0
-pydub>=0.25.1
-opencv-python>=4.8.0
-moviepy>=1.0.3
+pillow~=10.0
+pydub~=0.25
+opencv-python~=4.8
+moviepy~=1.0
 
 # Model Integration
-transformers>=4.45.0
-torch>=2.0.0
-accelerate>=0.25.0
-vllm>=0.6.0  # For efficient LLM serving
+transformers~=4.45
+torch~=2.0
+accelerate~=0.25
+# vllm~=0.6  # For efficient LLM serving - NOTE: vllm requires NVIDIA GPU, not compatible with macOS. Install manually on Linux GPU servers.
 
 # HTTP & API
-httpx>=0.25.0
-aiohttp>=3.9.0
-fastapi>=0.104.0
-uvicorn>=0.24.0
+httpx~=0.25
+aiohttp~=3.9
+fastapi~=0.104
+uvicorn~=0.24
 
 # Utilities
-python-dotenv>=1.0.0
-pydantic>=2.0.0
-pydantic-settings>=2.0.0
-tenacity>=8.2.0
-loguru>=0.7.0
+python-dotenv~=1.0
+pydantic~=2.0
+pydantic-settings~=2.0
+tenacity~=8.2
+loguru~=0.7
 
 # Development
-pytest>=7.4.0
-pytest-asyncio>=0.21.0
-black>=23.10.0
-ruff>=0.1.0
+pytest~=7.4
+pytest-asyncio~=0.21
+black~=23.10
+ruff~=0.1
+Option
