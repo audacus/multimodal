@@ -53,7 +53,7 @@ A bi-directional multimodal AI agent that processes text, images, audio, and vid
 
 ### 1. Prerequisites
 
-- Python 3.10+
+- Python 3.10-3.13 (recommended: 3.13)
 - NVIDIA GPU (for local deployment)
 - Docker & Docker Compose
 - Telegram Bot Token ([Create one with @BotFather](https://t.me/BotFather))

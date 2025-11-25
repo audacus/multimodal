@@ -35,6 +35,7 @@ Create a bi-directional multimodal AI agent that can:
 - Run efficiently on DigitalOcean GPU Droplets
 
 ### Requirements
+- **Python**: 3.10-3.13 (3.14+ has compatibility warnings with langchain-core)
 - **Backend**: LangChain/LangGraph v1.x
 - **Frontend**: Telegram bot
 - **Model**: Qwen3 Omni (multimodal LLM)
@@ -102,8 +103,8 @@ Create a bi-directional multimodal AI agent that can:
 
 | Category | Technology | Version | Purpose |
 |----------|-----------|---------|---------|
-| Framework | LangChain | >=0.3.0 | LLM orchestration |
-| Framework | LangGraph | >=0.2.0 | Agent workflow |
+| Framework | LangChain | ~=1.1 | LLM orchestration |
+| Framework | LangGraph | ~=1.0 | Agent workflow |
 | Tools | langchain-mcp-adapters | >=0.1.0 | MCP integration |
 | Bot | python-telegram-bot | >=21.0 | Telegram interface |
 | Model | transformers | >=4.45.0 | Model loading |
@@ -186,12 +187,15 @@ Create a bi-directional multimodal AI agent that can:
 
 ### 1. LangGraph Agent (src/agent/graph.py)
 
-**AgentState TypedDict**:
+**AgentState Definition** (V1.x pattern):
 ```python
-class AgentState(TypedDict):
-    messages: Annotated[Sequence[BaseMessage], operator.add]
+from langgraph.graph import MessagesState
+
+class AgentState(MessagesState):
     user_id: str
 ```
+
+This inherits the `messages` field with the `add_messages` reducer from `MessagesState`, following LangGraph v1.x best practices.
 
 **Graph Structure**:
 - **Entry Point**: `agent` node
@@ -1002,8 +1006,8 @@ workflow.add_edge("preprocess", "agent")
 
 | Package | Version | Reason |
 |---------|---------|--------|
-| langchain | >=0.3.0 | Latest features, MCP support |
-| langgraph | >=0.2.0 | StateGraph improvements |
+| langchain | ~=1.1 | V1.x features, MCP support, Python 3.10+ required |
+| langgraph | ~=1.0 | V1.x StateGraph, prebuilt components |
 | langchain-mcp-adapters | >=0.1.0 | Official MCP integration |
 | python-telegram-bot | >=21.0 | Async support, latest API |
 | transformers | >=4.45.0 | Qwen3 model support |
